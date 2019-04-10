@@ -9,7 +9,7 @@
   <title>Market Modeling | A Deep Learning Experiment</title>
 </head>
 <body>
-  {% include "./templates/navbar.html" %}
+  {% include "navbar.html" %}
   <div class="container mm-container">
     <div id="home-top">
       <div>
@@ -20,18 +20,18 @@
     <div class="steps">
       <div id="first">
         <p>Step 1: Input the number of days you would like to predict.</p>
-        <img src="{% static 'images/square_logo.png' %}" alt="">
+        <img src="./static/images/square_logo.png" alt="">
       </div>
       <div id="second">
         <p>Step 2: Click on the parameters you would like to predict.</p>
-        <img src="{% static 'images/square_logo.png' %}" alt="">
+        <img src="./static/images/square_logo.png" alt="">
       </div>
       <div id="third">
         <p>Step 3: Download the predictions of data</p>
-        <img src="{% static 'images/square_logo.png' %}" alt="">
+        <img src="./static/images/square_logo.png" alt="">
       </div>
     </div>
   </div>
-  {% include './templates/footer.html' %}
+  {% include "footer.html" %}
 </body>
 </html>
