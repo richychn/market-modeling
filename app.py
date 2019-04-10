@@ -8,7 +8,7 @@ def home():
 
 @app.route("/graph")
 def main():
-  return flask.render_template('./templates/main.html')
+  return flask.send_from_directory('./templates', 'main.html')
 
 @app.route("/api/v1/greeting", methods=['POST'])
 def greeting_api():
