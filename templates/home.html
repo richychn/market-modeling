@@ -8,9 +8,8 @@
   <link rel="stylesheet" href="./static/css/index.css">
   <title>Market Modeling | A Deep Learning Experiment</title>
 </head>
-{% block content %}
 <body>
-  {% include "./templates/navbar.html" %}
+  {% include "navbar.html" %}
   <div class="container mm-container">
     <div id="home-top">
       <div>
@@ -33,7 +32,6 @@
       </div>
     </div>
   </div>
-  {% include "./templates/footer.html" %}
+  {% include "footer.html" %}
 </body>
-{% endblock content %}
 </html>
