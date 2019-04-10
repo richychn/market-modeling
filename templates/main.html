@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -30,5 +30,61 @@
   </div>
   {% include 'footer.html' %}
   <script type="text/javascript" src="{% static 'js/graph.js' %}"></script>
+</body>
+</html>
+ -->
+
+
+ <!DOCTYPE html>
+<html>
+<head>
+  {% load static %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800|Mukta" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+  <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <title>Market Modeling | A Deep Learning Experiment</title>
+</head>
+<body>
+  {% include "navbar.html" %}
+  <div class="container mm-container">
+    <div id="main-top">
+      <div>
+        <input type="number" class="search" placeholder="How many days do you want to predict?">
+        <button type="submit" class="go">GO!</button>
+      </div>
+    </div>
+    <div class="graphs">
+      <div class="roundbox">
+        <div class="legend">
+          <p><input type="checkbox" class="legendCheckbox" value="a" onchange="updateall();">SP500</p>
+          <p><input type="checkbox" class="legendCheckbox" value="b" onchange="updateall();">123</p>
+        </div>
+        <div class="ct-chart ct-golden-section graph"></div>
+      </div>
+    </div>
+  </div>
+  {% include 'footer.html' %}
+  <script type="text/javascript" src="{% static 'js/graph.js' %}"></script>
+  <script>
+    function updateall() {
+      var checkboxes = document.querySelectorAll(".legendCheckbox"); ///array of elements which are checkboxes
+      for(var i = 0; i < checkboxes.length; i++) {
+        var letter = checkboxes[i].value;
+        var line = document.querySelector('.ct-series-' + letter); ///gets on element called ctseriesa
+        if (checkboxes[i].checked) {
+          line.style.display = "inline";
+        }
+        else {
+          line.style.display = "none";
+        }
+      }
+    }
+    //updateall();
+    setTimeout(updateall, 0); /////calls the function and hides the lines
+  </script>
 </body>
 </html>
