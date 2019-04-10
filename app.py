@@ -3,8 +3,12 @@ import flask
 app = flask.Flask(__name__)
 
 @app.route("/")
-def hello_world():
-  return flask.send_from_directory('.', 'hello.html')
+def home():
+  return flask.send_from_directory('./templates/', 'home.html')
+
+@app.route("/graph")
+def main():
+  return flask.render_template('./templates/main.html')
 
 @app.route("/api/v1/greeting", methods=['POST'])
 def greeting_api():

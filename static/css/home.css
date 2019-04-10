@@ -1,0 +1,85 @@
+body {
+  background-color: var(--light-aqua);
+  font-family: 'Montserrat', sans-serif;
+}
+
+a {
+  font-family: 'Mukta', sans-serif;
+}
+
+h1 {
+  font-family: 'Mukta', sans-serif;
+}
+
+.mm-container {
+  height: 85vh;
+  padding-bottom: 50px;
+}
+
+#home-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10vh 0 10vh 0;
+}
+
+.search {
+  padding: 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  height: 50px;
+  width: 390px;
+  box-shadow: 2px 2px 20px var(--shadow-aqua);
+  border-style: none;
+}
+
+.search:focus {
+  outline: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.go {
+  margin: -30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--navbar-text);
+  border-style: none;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.go:hover {
+  background-color: var(--navbar-hover)
+}
+
+.go:focus {
+  outline: none;
+}
+
+.steps {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.steps > div {
+  width: 290px;
+}
+
+.steps > div > p {
+  color: var(--navbar-text);
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.steps > div > img {
+  width: 290px;
+  height: 290px;
+}

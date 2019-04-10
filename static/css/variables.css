@@ -1,0 +1,19 @@
+:root {
+  /*
+    Colors
+  */
+  --orange: #FF9F1C;
+  --light-orange: #FFBF69;
+  --light-aqua: #CBF3F0;
+  --aqua: #2EC4B6;
+  --white: #EEE;
+  --shadow-aqua: #66CCCC;
+  /*
+    Variables
+  */
+  --body-bg-color: var(--white);
+  --bg-color: var(--light-aqua);
+  --graph-title: var(--aqua);
+  --navbar-text: var(--orange);
+  --navbar-hover: var(--light-orange);
+}

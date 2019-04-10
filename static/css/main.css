@@ -1,0 +1,31 @@
+#main-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 5vh 0 5vh 0;
+}
+
+.graphs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.roundbox {
+  width: 1000px;
+  height: 50vh;
+  background-color: white;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 2px 2px 10px 2px var(--shadow-aqua);
+}
+
+.graph {
+  margin: 10px;
+  flex-grow: 1;
+}
+
+.legend {
+  width: 400px;
+}
