@@ -77,3 +77,12 @@
   text-decoration:none;
 }
 
+.legend{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+}
+.col2{
+  margin-left: 30px;
+}

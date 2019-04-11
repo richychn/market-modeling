@@ -23,55 +23,58 @@
     <div class="graphs">
       <div class="roundbox">
         <div class="legend">
-
-          <p>
+          <div class="col1">
+            <p>
             <label>
               <input type="checkbox" class="legendCheckbox" id="legendCheckboxA" value="a" onchange="updateall();">
               <span class="legendLabel">SP500</span>
             </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" class="legendCheckbox" id="legendCheckboxB" value="b" onchange="updateall();">
-              <span class="legendLabel">USDJPY</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" class="legendCheckbox" id="legendCheckboxC" value="c" onchange="updateall();">
-              <span class="legendLabel">GBPUSD</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" class="legendCheckbox" id="legendCheckboxD" value="d" onchange="updateall();">
-              <span class="legendLabel">AUDUSD</span>
-            </label>
-          </p>
-          <p>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" class="legendCheckbox" id="legendCheckboxB" value="b" onchange="updateall();">
+                <span class="legendLabel">USDJPY</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" class="legendCheckbox" id="legendCheckboxC" value="c" onchange="updateall();">
+                <span class="legendLabel">GBPUSD</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" class="legendCheckbox" id="legendCheckboxD" value="d" onchange="updateall();">
+                <span class="legendLabel">AUDUSD</span>
+              </label>
+            </p>
+          </div>
+          <div class="col2">
+            <p>
             <label>
               <input type="checkbox" class="legendCheckbox" id="legendCheckboxE" value="e" onchange="updateall();">
               <span class="legendLabel">2YTreasury</span>
             </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" class="legendCheckbox" id="legendCheckboxF" value="f" onchange="updateall();">
-              <span class="legendLabel">10YTreasury</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" class="legendCheckbox" id="legendCheckboxG" value="g" onchange="updateall();">
-              <span class="legendLabel">Gold</span>
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" class="legendCheckbox" id="legendCheckboxH" value="h" onchange="updateall();">
-              <span class="legendLabel">Oil</span>
-            </label>
-          </p>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" class="legendCheckbox" id="legendCheckboxF" value="f" onchange="updateall();">
+                <span class="legendLabel">10YTreasury</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" class="legendCheckbox" id="legendCheckboxG" value="g" onchange="updateall();">
+                <span class="legendLabel">Gold</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" class="legendCheckbox" id="legendCheckboxH" value="h" onchange="updateall();">
+                <span class="legendLabel">Oil</span>
+              </label>
+            </p>
+          </div>
 
         </div>
         <div class="ct-chart ct-golden-section graph"></div>
@@ -82,20 +85,20 @@
   <script type="text/javascript" src="./static/js/graph.js"></script>
   <script>
     function updateall() {
-      var checkboxes = document.querySelectorAll(".legendCheckbox"); ///array of elements which are checkboxes
+      var checkboxes = document.querySelectorAll(".legendCheckbox"); //array of elements which are checkboxes
       for(var i = 0; i < checkboxes.length; i++) {
         var letter = checkboxes[i].value;
-        var line = document.querySelector('.ct-series-' + letter); ///gets on element called ctseriesa
+        var line = document.querySelector('.ct-series-' + letter); //gets on element called ctseriesa
         if (checkboxes[i].checked) {
           line.style.display = "inline";
+
         }
         else {
           line.style.display = "none";
         }
       }
     }
-    //updateall();
-    setTimeout(updateall, 0); /////calls the function and hides the lines
+    setTimeout(updateall, 0); //calls the function and hides the lines
   </script>
 </body>
 </html>
