@@ -76,3 +76,17 @@
   color: var(--color-OIL);
   text-decoration:none;
 }
+
+.legendCheckbox + .legendLabel::before{
+  width:10px;
+  height:10px;
+  border: 1px solid blue;
+  content:'';
+  display:inline-block;
+  margin-right:10px;
+}
+.legendCheckbox:checked + .legendLabel::before{
+  background:blue;
+
+
+}
