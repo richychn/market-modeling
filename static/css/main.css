@@ -87,6 +87,4 @@
 }
 .legendCheckbox:checked + .legendLabel::before{
   background:blue;
-
-
 }
