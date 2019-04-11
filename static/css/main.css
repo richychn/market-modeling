@@ -41,36 +41,38 @@
 .legendCheckbox + .legendLabel {
   color:gray;
   text-decoration: line-through;
+  cursor: pointer;
 }
+
 #legendCheckboxA:checked + .legendLabel {
-  color:#D00000;
+  color: var(--color-SP500);
   text-decoration:none;
 }
 #legendCheckboxB:checked + .legendLabel {
-  color:#3F88C5;
+  color: var(--color-JPY);
   text-decoration:none;
 }
 #legendCheckboxC:checked + .legendLabel {
-  color:#F2BB05;
+  color: var(--color-GBP);
   text-decoration:none;
 }
 #legendCheckboxD:checked + .legendLabel {
-  color:#032B43;
+  color: var(--color-AUD);
   text-decoration:none;
 }
 #legendCheckboxE:checked + .legendLabel {
-  color:#136F63;
+  color: var(--color-2YR);
   text-decoration:none;
 }
 #legendCheckboxF:checked + .legendLabel {
-  color:#A4B0F5;
+  color: var(--color-10YR);
   text-decoration:none;
 }
 #legendCheckboxG:checked + .legendLabel {
-  color:#90BE6D;
+  color: var(--color-GOLD);
   text-decoration:none;
 }
 #legendCheckboxH:checked + .legendLabel {
-  color:#FC6471;
+  color: var(--color-OIL);
   text-decoration:none;
 }
