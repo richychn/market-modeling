@@ -31,7 +31,46 @@
   margin: 100px 100px;
 }
 
-.legendCheckBox {
-  background-color:
+.legendCheckbox {
+  position:absolute;
+  height:0;
+  width:0;
+  opacity:0;
 }
 
+.legendCheckbox + .legendLabel {
+  color:gray;
+  text-decoration: line-through;
+}
+#legendCheckboxA:checked + .legendLabel {
+  color:#D00000;
+  text-decoration:none;
+}
+#legendCheckboxB:checked + .legendLabel {
+  color:#3F88C5;
+  text-decoration:none;
+}
+#legendCheckboxC:checked + .legendLabel {
+  color:#F2BB05;
+  text-decoration:none;
+}
+#legendCheckboxD:checked + .legendLabel {
+  color:#032B43;
+  text-decoration:none;
+}
+#legendCheckboxE:checked + .legendLabel {
+  color:#136F63;
+  text-decoration:none;
+}
+#legendCheckboxF:checked + .legendLabel {
+  color:#A4B0F5;
+  text-decoration:none;
+}
+#legendCheckboxG:checked + .legendLabel {
+  color:#90BE6D;
+  text-decoration:none;
+}
+#legendCheckboxH:checked + .legendLabel {
+  color:#FC6471;
+  text-decoration:none;
+}
