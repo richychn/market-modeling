@@ -1,6 +1,6 @@
 function graph(raw) {
   var data = {
-    series: [raw]
+    series: raw
   }
   new Chartist.Line('.ct-chart', data)
 }

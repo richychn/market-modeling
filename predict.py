@@ -36,6 +36,7 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
 
 def predict(num=1):
     data = pd.read_csv(filepath_or_buffer="./static/data.csv", index_col="date")
+    data = data.apply(pd.to_numeric, errors = "coerce")
     data['spindx'].replace(0, np.nan, inplace=True)
     data['spindx'].fillna(method='ffill', inplace=True)
 
@@ -45,39 +46,26 @@ def predict(num=1):
 
     historic_data = np.array([])
     for day in values[-3:]:
-        #historic_data = np.concatenate((values[-3], values[-2], values[-1]), axis=None)
         historic_data = np.concatenate((historic_data, day), axis=None)
-    historic_data = np.append (historic_data, historic_data[0]) #add a dummy for prediction
 
-    look_back = 3
-    time_steps = 1
-    series_to_supervised(values, look_back, time_steps)
-    reframed = series_to_supervised(values, look_back, time_steps)
-
-    number_of_variables = 8
-    #keeping first varible in first period
-    reframed.drop(reframed.columns[-1 * number_of_variables + 1:], axis=1, inplace=True)
-    reframed.drop(reframed.columns[look_back*number_of_variables:-1], axis=1, inplace=True)
-
-    reframed = reframed.append(dict(zip(reframed.columns, historic_data)), ignore_index=True)
-
-    scaler = MinMaxScaler(feature_range=(0, 1))
-    scaled_pred = scaler.fit_transform(reframed)
-
-    scaled_pred.shape
-
-    pred_para = scaled_pred[-1][:-1]
-    pred_para = pred_para.reshape(1,1,pred_para.shape[0])
-
+    pred_para = historic_data.reshape(1,1,historic_data.shape[0])
     multi_model = load_model("./static/lstm.hdf5")
     yhat = multi_model.predict(pred_para)
+    yhat = yhat[0][0]
 
-    pred_para = pred_para.reshape((1,24))
-    pred = concatenate((pred_para[:, :], yhat), axis=1)
-    inv_pred = scaler.inverse_transform(pred)
-    inv_pred = inv_pred[:,-1]
     graph = []
     for row in values[-30:]:
-        graph.append(row[0])
-    graph.append(inv_pred[0])
-    return graph
+        graph.append(row)
+    graph.append(yhat)
+
+    chartist = [[],[],[],[],[],[],[],[]]
+    for row in graph:
+      chartist[0].append(row[0])
+      chartist[1].append(row[1])
+      chartist[2].append(row[2])
+      chartist[3].append(row[3])
+      chartist[4].append(row[4])
+      chartist[5].append(row[5])
+      chartist[6].append(row[6])
+      chartist[7].append(row[7])
+    return chartist
