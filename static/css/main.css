@@ -24,7 +24,9 @@
 .graph {
   margin: 30px;
   flex-grow: 1;
-  margin-left: -80px
+  margin-left: -80px;
+  display: flex;
+  justify-content: center;
 }
 
 
