@@ -80,6 +80,10 @@
   </div>
   {% include 'footer.html' %}
   <script type="text/javascript" src="./static/js/graph.js"></script>
+  <script type="text/javascript">
+    data = {{ data }}
+    graph(data)
+  </script>
   <script>
     function updateall() {
       var checkboxes = document.querySelectorAll(".legendCheckbox"); ///array of elements which are checkboxes
