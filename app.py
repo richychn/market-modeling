@@ -1,6 +1,5 @@
 import flask
 import predict
-from keras import backend
 
 app = flask.Flask(__name__, template_folder="templates")
 
@@ -11,7 +10,6 @@ def home():
 @app.route("/graph")
 def main():
   data = predict.predict()
-  backend.clear_session()
   return flask.render_template('main.html', data=data)
 
 @app.route("/howto")

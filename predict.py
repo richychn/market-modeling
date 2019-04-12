@@ -8,6 +8,7 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
 from keras.models import load_model
+from keras import backend
 import numpy as np
 
 def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
@@ -25,11 +26,8 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
             names += [('var%d(t)' % (j+1)) for j in range(n_vars)]
         else:
             names += [('var%d(t+%d)' % (j+1, i)) for j in range(n_vars)]
-    #print(cols)
-#     # put it all together
     agg = pd.concat(cols, axis=1)
     agg.columns = names
-    # drop rows with NaN values
     if dropnan:
         agg.dropna(inplace=True)
     return agg
@@ -49,6 +47,7 @@ def predict(num=1):
         historic_data = np.concatenate((historic_data, day), axis=None)
 
     pred_para = historic_data.reshape(1,1,historic_data.shape[0])
+    backend.clear_session()
     multi_model = load_model("./static/lstm.hdf5")
     yhat = multi_model.predict(pred_para)
     yhat = yhat[0][0]
