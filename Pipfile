@@ -7,6 +7,11 @@ verify_ssl = true
 
 [packages]
 flask = "*"
+tensorflow = "*"
+numpy = "*"
+keras = "*"
+pandas = "*"
+sklearn = "*"
 
 [requires]
 python_version = "2.7"

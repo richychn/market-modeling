@@ -1,4 +1,5 @@
 import flask
+import predict
 
 app = flask.Flask(__name__, template_folder="templates")
 
@@ -8,7 +9,8 @@ def home():
 
 @app.route("/graph")
 def main():
-  return flask.render_template('main.html')
+  data = predict.predict()
+  return flask.render_template('main.html', data=data)
 
 @app.route("/howto")
 def howto():
@@ -18,13 +20,15 @@ def howto():
 def aboutus():
   return flask.render_template('aboutus.html')
 
-@app.route("/api/v1/greeting", methods=['POST'])
-def greeting_api():
+@app.route("/api/v1/predict", methods=['POST'])
+def prediction():
   request = flask.request.get_json(silent=True)
   if isinstance(request, dict):
-    response = {
-      "greeting": "Hello, " + request.get("name", "friend") + "!"
-    }
+      num = request.get("num", 1)
+      data = predict.predict(num)
+      response = {
+        "data": data
+      }
   else:
     response = {
       "error": "Invalid JSON"
