@@ -93,46 +93,77 @@
   /* Control the thikness of your lines */
   stroke-width: 5px;
 }
+.ct-series-a .ct-point{
+  stroke: var(--color-SP500);
+}
+
 .ct-series-b .ct-line {
   /* Set the colour of this series line */
   stroke: var(--color-JPY);
   /* Control the thikness of your lines */
   stroke-width: 5px;
-  fill:none;
 }
+.ct-series-b .ct-point{
+  stroke: var(--color-JPY);
+}
+
 .ct-series-c .ct-line {
   /* Set the colour of this series line */
   stroke: var(--color-GBP);
   /* Control the thikness of your lines */
   stroke-width: 5px;
 }
+.ct-series-c .ct-point{
+  stroke: var(--color-GBP);
+}
+
 .ct-series-d .ct-line {
   /* Set the colour of this series line */
   stroke: var(--color-AUD);
   /* Control the thikness of your lines */
   stroke-width: 5px;
 }
+.ct-series-d .ct-point{
+  stroke: var(--color-AUD);
+}
+
 .ct-series-e .ct-line {
   /* Set the colour of this series line */
   stroke: var(--color-2YR);
   /* Control the thikness of your lines */
   stroke-width: 5px;
 }
+.ct-series-e .ct-point{
+  stroke: var(--color-2YR);
+}
+
+
 .ct-series-f .ct-line {
   /* Set the colour of this series line */
   stroke: var(--color-10YR);
   /* Control the thikness of your lines */
   stroke-width: 5px;
 }
+.ct-series-f .ct-point{
+  stroke: var(--color-10YR);
+}
+
 .ct-series-g .ct-line {
   /* Set the colour of this series line */
   stroke: var(--color-GOLD);
   /* Control the thikness of your lines */
   stroke-width: 5px;
 }
+.ct-series-g .ct-point{
+  stroke: var(--color-GOLD);
+}
+
 .ct-series-h .ct-line {
   /* Set the colour of this series line */
   stroke: var(--color-OIL);
   /* Control the thikness of your lines */
   stroke-width: 5px;
+}
+.ct-series-h .ct-point{
+  stroke: var(--color-OIL);
 }
