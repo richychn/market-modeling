@@ -21,15 +21,77 @@
       </div>
     </div>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>
+      $(function() {
+        $("li").click(function(e) {
+          e.preventDefault();
+          $("li").removeClass("selected");
+          $(this).addClass("selected");
+        });
+      });
+    </script>
+
     <ul class="tab">
-        <li class="selected">Growth Rates</li>
-        <li>Levels</li>
+        <li class="selected"><a href="#">Growth Rates</a></li>
+        <li><a href="#">Levels</a></li>
     </ul>
 
     <div class="graphs">
       <div class="roundbox">
         <div class="legend">
-          <div class="col1">
+
+
+          <p>
+            <label>
+              <input type="checkbox" class="legendCheckbox" id="legendCheckboxA" value="a" onchange="updateall();">
+              <span class="legendLabel">SP500</span>
+            </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" class="legendCheckbox" id="legendCheckboxB" value="b" onchange="updateall();">
+                <span class="legendLabel">USDJPY</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" class="legendCheckbox" id="legendCheckboxC" value="c" onchange="updateall();">
+                <span class="legendLabel">GBPUSD</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" class="legendCheckbox" id="legendCheckboxD" value="d" onchange="updateall();">
+                <span class="legendLabel">AUDUSD</span>
+              </label>
+            </p>
+             <p>
+            <label>
+              <input type="checkbox" class="legendCheckbox" id="legendCheckboxE" value="e" onchange="updateall();">
+              <span class="legendLabel">2YTreasury</span>
+            </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" class="legendCheckbox" id="legendCheckboxF" value="f" onchange="updateall();">
+                <span class="legendLabel">10YTreasury</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" class="legendCheckbox" id="legendCheckboxG" value="g" onchange="updateall();">
+                <span class="legendLabel">Gold</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" class="legendCheckbox" id="legendCheckboxH" value="h" onchange="updateall();">
+                <span class="legendLabel">Oil</span>
+              </label>
+            </p>
+
+         <!--  <div class="col1">
             <p>
             <label>
               <input type="checkbox" class="legendCheckbox" id="legendCheckboxA" value="a" onchange="updateall();">
@@ -80,7 +142,7 @@
                 <span class="legendLabel">Oil</span>
               </label>
             </p>
-          </div>
+          </div> -->
 
         </div>
         <div class="ct-chart ct-golden-section graph"></div>

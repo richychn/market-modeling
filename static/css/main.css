@@ -31,7 +31,7 @@
 
 .legend {
   width: 400px;
-  margin: 100px 50px 100px 0px;
+  margin: 100px 50px 100px 100px;
   font-size: 17px;
 
 }
@@ -83,14 +83,14 @@
 }
 
 .legend{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-self: center;
+  margin: 100px 50px 100px 60px;
+  width: 200px;
 }
-.col2{
+
+
+/*.col2{
   margin-left: 20px;
-}
+}*/
 
 .ct-series-a .ct-line {
   /* Set the colour of this series line */

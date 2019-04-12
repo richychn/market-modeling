@@ -1,3 +1,10 @@
+.tab li a {
+  text-decoration: none;
+  outline: none;
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .tab {
   text-align: center;
   list-style: none;
@@ -10,6 +17,7 @@
   font-weight: 800;
 
 }
+
 
 .tab:after {
   position: absolute;
@@ -79,3 +87,4 @@
   border: 0px solid #AAA;
   display: inline-block;
 }
+
