@@ -9,11 +9,12 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: 0px;
 }
 
 .roundbox {
-  width: 1000px;
-  height: 50vh;
+  width: 2000px;
+  height: 60vh;
   background-color: white;
   border-radius: 30px;
   display: flex;
@@ -22,13 +23,17 @@
 }
 
 .graph {
-  margin: 10px;
+  margin: 30px;
   flex-grow: 1;
+  margin-left: -80px
 }
+
 
 .legend {
   width: 400px;
-  margin: 100px 100px;
+  margin: 100px 50px 100px 0px;
+  font-size: 17px;
+
 }
 
 .legendCheckbox {
@@ -84,7 +89,7 @@
   align-self: center;
 }
 .col2{
-  margin-left: 30px;
+  margin-left: 20px;
 }
 
 .ct-series-a .ct-line {
@@ -136,7 +141,6 @@
 .ct-series-e .ct-point{
   stroke: var(--color-2YR);
 }
-
 
 .ct-series-f .ct-line {
   /* Set the colour of this series line */
