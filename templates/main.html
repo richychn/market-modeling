@@ -90,32 +90,19 @@
             </p>
 
         </div>
-        <div class="ct-chart ct-golden-section graph"></div>
+        <div class="ct-chart ct-golden-section graph">
+          <img src="./static/images/blue_loading_bouncing.gif" id="loading">
+        </div>
       </div>
     </div>
   </div>
   {% include 'footer.html' %}
   <script type="text/javascript" src="./static/js/graph.js"></script>
-  <script type="text/javascript">
-    data = {{ data }}
-    graph(data)
-  </script>
   <script>
-    function updateall() {
-      var checkboxes = document.querySelectorAll(".legendCheckbox"); //array of elements which are checkboxes
-      for(var i = 0; i < checkboxes.length; i++) {
-        var letter = checkboxes[i].value;
-        var line = document.querySelector('.ct-series-' + letter); //gets on element called ctseriesa
-        if (checkboxes[i].checked) {
-          line.style.display = "inline";
-
-        }
-        else {
-          line.style.display = "none";
-        }
-      }
-    }
     setTimeout(updateall, 0); //calls the function and hides the lines
+    $.get("{{url_for('prediction')}}").done(function(data){
+      graph(data, updateall)
+    })
   </script>
 </body>
 </html>

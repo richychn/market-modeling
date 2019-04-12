@@ -9,8 +9,7 @@ def home():
 
 @app.route("/graph")
 def main():
-  data = predict.predict()
-  return flask.render_template('main.html', data=data)
+  return flask.render_template('main.html')
 
 @app.route("/howto")
 def howto():
@@ -20,17 +19,16 @@ def howto():
 def aboutus():
   return flask.render_template('aboutus.html')
 
-@app.route("/api/v1/predict", methods=['POST'])
+@app.route("/api/v1/predict", methods=['GET'])
 def prediction():
-  request = flask.request.get_json(silent=True)
-  if isinstance(request, dict):
-      num = request.get("num", 1)
-      data = predict.predict(num)
-      response = {
-        "data": data
-      }
-  else:
-    response = {
-      "error": "Invalid JSON"
-    }
+  # if isinstance(request, dict):
+      # num = request.get("num", 1)
+  data = predict.predict()
+  response = {}
+  for i in range(len(data)):
+    response[str(i)] = str(data[i])
+  # else:
+  #   response = {
+  #     "error": "Invalid JSON"
+  #   }
   return flask.jsonify(response)
