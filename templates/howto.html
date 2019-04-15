@@ -11,8 +11,44 @@
 <body>
   {% include "navbar.html" %}
   <div class="container mm-container">
-    <p>Hello. This is where our we will give instructions for our Market Modeling application.</p>
-  </div>
+    <div class="page_title">
+      <p> How To </p>
+    </div>
+    <div class="how_to_box">
+
+      <div class="how_to_list">
+        <li id="data">
+          <a href="#"> Data </a>
+        </li>
+        <li id="param">
+            <a href="#"> Parameters </a>
+        </li> 
+        <li id="graphs">
+            <a href="#"> Graphs </a>
+        </li>
+        <li id="export">
+            <a href="#"> Export </a>
+        </li>
+      </div>
+
+      <div class="how_to_steps">
+          <div id="first">
+            <p><b>Step 1:</b> Input the number of days you would like to predict.</p>
+            <img src="./static/images/step_1.gif" alt="">
+          </div>
+          <div id="second">
+            <p><b>Step 2:</b> Click on the parameters you would like to predict.</p>
+            <img src="./static/images/step_2.gif" alt="">
+          </div>
+          <div id="third">
+            <p><b>Step 3:</b> Download the predictions of data</p>
+            <img src="./static/images/step_2.gif" alt="">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>  
   {% include 'footer.html' %}
 </body>
 </html>
