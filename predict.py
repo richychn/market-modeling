@@ -32,7 +32,7 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
         agg.dropna(inplace=True)
     return agg
 
-def predict(num=1):
+def setup():
     data = pd.read_csv(filepath_or_buffer="./static/data.csv", index_col="date")
     data = data.apply(pd.to_numeric, errors = "coerce")
     data['spindx'].replace(0, np.nan, inplace=True)
@@ -46,7 +46,11 @@ def predict(num=1):
     for day in values[-3:]:
         historic_data = np.concatenate((historic_data, day), axis=None)
 
-    pred_para = historic_data.reshape(1,1,historic_data.shape[0])
+    return values, historic_data.reshape(1,1,historic_data.shape[0])
+
+def predict(num=1):
+    values, pred_para = setup()
+
     backend.clear_session()
     multi_model = load_model("./static/lstm.hdf5")
     yhat = multi_model.predict(pred_para)

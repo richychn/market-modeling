@@ -5,7 +5,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800|Mukta" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
-  <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/index.css" type="text/css">
   <title>Market Modeling | A Deep Learning Experiment</title>
@@ -16,93 +15,117 @@
   <div class="container mm-container">
     <div id="main-top">
       <div>
-        <input type="number" class="search" placeholder="How many days do you want to predict?">
-        <button type="submit" class="go">GO!</button>
+        <form id="search">
+          <input type="number" name="num" class="search" placeholder="How many days do you want to predict?">
+          <button type="submit" class="go">GO!</button>
+        </form>
       </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script>
-      $(function() {
-        $("li").click(function(e) {
-          e.preventDefault();
-          $("li").removeClass("selected");
-          $(this).addClass("selected");
-        });
-      });
-    </script>
+    <div class="steps">
+      <div id="first">
+        <p>Step 1: Input the number of days you would like to predict.</p>
+        <img src="./static/images/square_logo.png" alt="">
+      </div>
+      <div id="second">
+        <p>Step 2: Click on the parameters you would like to predict.</p>
+        <img src="./static/images/square_logo.png" alt="">
+      </div>
+      <div id="third">
+        <p>Step 3: Download the predictions of data</p>
+        <img src="./static/images/square_logo.png" alt="">
+      </div>
+    </div>
 
-    <ul class="tab">
-        <li class="selected"><a href="#">Growth Rates</a></li>
-        <li><a href="#">Levels</a></li>
-    </ul>
+    <div class="prediction">
+      <ul class="tab">
+          <li class="selected"><a href="#">Growth Rates</a></li>
+          <li><a href="#">Levels</a></li>
+      </ul>
 
-    <div class="graphs">
-      <div class="roundbox">
-        <div class="legend">
-          <p>
-            <label>
-              <input type="checkbox" class="legendCheckbox" id="legendCheckboxA" value="a" onchange="updateall();">
-              <span class="legendLabel">SP500</span>
-            </label>
-            </p>
+      <div class="graphs">
+        <div class="roundbox">
+          <div class="legend">
             <p>
               <label>
-                <input type="checkbox" class="legendCheckbox" id="legendCheckboxB" value="b" onchange="updateall();">
-                <span class="legendLabel">USDJPY</span>
+                <input type="checkbox" class="legendCheckbox" id="legendCheckboxA" value="a" onchange="updateall();">
+                <span class="legendLabel">SP500</span>
               </label>
-            </p>
-            <p>
+              </p>
+              <p>
+                <label>
+                  <input type="checkbox" class="legendCheckbox" id="legendCheckboxB" value="b" onchange="updateall();">
+                  <span class="legendLabel">USDJPY</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input type="checkbox" class="legendCheckbox" id="legendCheckboxC" value="c" onchange="updateall();">
+                  <span class="legendLabel">GBPUSD</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input type="checkbox" class="legendCheckbox" id="legendCheckboxD" value="d" onchange="updateall();">
+                  <span class="legendLabel">AUDUSD</span>
+                </label>
+              </p>
+               <p>
               <label>
-                <input type="checkbox" class="legendCheckbox" id="legendCheckboxC" value="c" onchange="updateall();">
-                <span class="legendLabel">GBPUSD</span>
+                <input type="checkbox" class="legendCheckbox" id="legendCheckboxE" value="e" onchange="updateall();">
+                <span class="legendLabel">2YTreasury</span>
               </label>
-            </p>
-            <p>
-              <label>
-                <input type="checkbox" class="legendCheckbox" id="legendCheckboxD" value="d" onchange="updateall();">
-                <span class="legendLabel">AUDUSD</span>
-              </label>
-            </p>
-             <p>
-            <label>
-              <input type="checkbox" class="legendCheckbox" id="legendCheckboxE" value="e" onchange="updateall();">
-              <span class="legendLabel">2YTreasury</span>
-            </label>
-            </p>
-            <p>
-              <label>
-                <input type="checkbox" class="legendCheckbox" id="legendCheckboxF" value="f" onchange="updateall();">
-                <span class="legendLabel">10YTreasury</span>
-              </label>
-            </p>
-            <p>
-              <label>
-                <input type="checkbox" class="legendCheckbox" id="legendCheckboxG" value="g" onchange="updateall();">
-                <span class="legendLabel">Gold</span>
-              </label>
-            </p>
-            <p>
-              <label>
-                <input type="checkbox" class="legendCheckbox" id="legendCheckboxH" value="h" onchange="updateall();">
-                <span class="legendLabel">Oil</span>
-              </label>
-            </p>
+              </p>
+              <p>
+                <label>
+                  <input type="checkbox" class="legendCheckbox" id="legendCheckboxF" value="f" onchange="updateall();">
+                  <span class="legendLabel">10YTreasury</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input type="checkbox" class="legendCheckbox" id="legendCheckboxG" value="g" onchange="updateall();">
+                  <span class="legendLabel">Gold</span>
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input type="checkbox" class="legendCheckbox" id="legendCheckboxH" value="h" onchange="updateall();">
+                  <span class="legendLabel">Oil</span>
+                </label>
+              </p>
 
-        </div>
-        <div class="ct-chart ct-golden-section graph">
-          <img src="./static/images/blue_loading_bouncing.gif" id="loading">
+          </div>
+          <div class="ct-chart ct-golden-section graph">
+            <img src="./static/images/blue_loading_bouncing.gif" id="loading">
+          </div>
         </div>
       </div>
     </div>
   </div>
   {% include 'footer.html' %}
+  <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="./static/js/graph.js"></script>
   <script>
     setTimeout(updateall, 0); //calls the function and hides the lines
-    $.post("{{url_for('prediction')}}", JSON.stringify({"num": 1}), function(data, status){
-      graph(data)
+    $('#search').submit(function(e) {
+      e.preventDefault();
+      $(".steps")[0].style.display = "none"
+      $(".prediction")[0].style.display = "inherit"
+      $("#loading")[0].style.display = "flex"
+      var num = $(this).serialize().split("=")[1]
+      $.post("{{url_for('prediction')}}", JSON.stringify({"num": num}), function(data, status){
+        graph(data)
+      })
     })
+    $(function() {
+      $("li").click(function(e) {
+        e.preventDefault();
+        $("li").removeClass("selected");
+        $(this).addClass("selected");
+      });
+    });
   </script>
 </body>
 </html>
