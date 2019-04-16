@@ -2,3 +2,47 @@ body {
   background-color: var(--light-aqua);
   font-family: 'Montserrat', sans-serif;
 }
+
+.page_title > p {
+  margin: 30px;
+  font-size: 30px;
+  font-weight: 800;
+  align-content: center;
+}
+
+.how_to_box {
+  display: flex;
+  flex-direction: row;
+}
+
+.how_to_list {
+  width: 100px;
+  margin-left: 50px;
+}
+
+.how_to_steps {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 50px;
+}
+
+.how_to_steps > div {
+  align-content: center;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.how_to_steps > div > p {
+  display: inline;
+  text-align: center;
+  color: var(--navbar-text);
+  font-size: 16px;
+}
+
+.how_to_steps > div > img {
+  margin: 30px;
+  width: 290px;
+  height: 290px;
+}
