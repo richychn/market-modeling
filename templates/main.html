@@ -100,23 +100,9 @@
   <script type="text/javascript" src="./static/js/graph.js"></script>
   <script>
     setTimeout(updateall, 0); //calls the function and hides the lines
-    // $.post("{{url_for('prediction')}}", '{"num": 1}', function(data, status){
-    //   // graph(data)
-    //   console.log(data)
-    // })
-    $.ajax({
-        url: "{{url_for('prediction')}}",
-        data: {"num": 1},
-        type: 'POST',
-        success: function(response) {
-            console.log("success");
-            console.log(response);
-            // graph(response);
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
+    $.post("{{url_for('prediction')}}", JSON.stringify({"num": 1}), function(data, status){
+      graph(data)
+    })
   </script>
 </body>
 </html>

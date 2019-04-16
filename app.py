@@ -21,7 +21,7 @@ def aboutus():
 
 @app.route("/api/v1/predict", methods=['POST'])
 def prediction():
-  request = flask.request.get_json(silent=True)
+  request = flask.request.get_json(force=True)
   if isinstance(request, dict):
     num = request.get("num", 1)
     data = predict.predict()
