@@ -1,8 +1,20 @@
+.prediction {
+  display: none;
+}
+
 #main-top {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: 5vh 0 5vh 0;
+}
+
+#loading {
+  display: none;
+}
+
+.tab > li:hover {
+  cursor: pointer;
 }
 
 .graphs {
