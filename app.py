@@ -20,7 +20,7 @@ def prediction():
   request = flask.request.get_json(force=True)
   if isinstance(request, dict):
     num = request.get("num", 1)
-    data = predict.predict()
+    data = predict.predict(int(num))
     response = {}
     for i in range(len(data)):
       response[str(i)] = str(data[i])

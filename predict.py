@@ -49,17 +49,22 @@ def setup():
     return values, historic_data.reshape(1,1,historic_data.shape[0])
 
 def predict(num=1):
+    num = int(num)
     values, pred_para = setup()
 
     backend.clear_session()
     multi_model = load_model("./static/lstm.hdf5")
-    yhat = multi_model.predict(pred_para)
-    yhat = yhat[0][0]
 
     graph = []
     for row in values[-30:]:
         graph.append(row)
-    graph.append(yhat)
+
+    while num != 0:
+      yhat = multi_model.predict(pred_para)
+      graph.append(yhat[0][0])
+      pred_para = np.concatenate((pred_para.flatten()[8:], yhat[0][0]))
+      pred_para = pred_para.reshape(1,1, pred_para.shape[0])
+      num -= 1
 
     chartist = [[],[],[],[],[],[],[],[]]
     for row in graph:
