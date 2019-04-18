@@ -39,8 +39,8 @@
 
     <div class="prediction">
       <ul class="tab">
-          <li class="selected"><a href="#">Growth Rates</a></li>
-          <li><a href="#">Levels</a></li>
+          <li class="selected" id="growth"><a href="#">Growth Rates</a></li>
+          <li id="levels"><a href="#">Levels</a></li>
       </ul>
 
       <div class="graphs">
@@ -115,15 +115,33 @@
       $(".prediction")[0].style.display = "inherit"
       $("#loading")[0].style.display = "flex"
       var num = $(this).serialize().split("=")[1]
-      $.post("{{url_for('prediction')}}", JSON.stringify({"num": num}), function(data, status){
-        graph(data)
-      })
+      if ($(".selected")[0].id == "levels") {
+        $.post("{{url_for('prediction_levels')}}", JSON.stringify({"num": num}), function(data, status){
+          graph(data)
+        })
+      } else {
+        $.post("{{url_for('prediction_growth')}}", JSON.stringify({"num": num}), function(data, status){
+          graph(data)
+        })
+      }
     })
     $(function() {
       $("li").click(function(e) {
         e.preventDefault();
         $("li").removeClass("selected");
         $(this).addClass("selected");
+        $("#loading")[0].style.display = "flex"
+        num = $("#search").serialize().split("=")[1]
+        if ($(this)[0].id == "levels") {
+          $.post("{{url_for('prediction_levels')}}", JSON.stringify({"num": num}), function(data, status){
+            graph(data)
+          })
+        } else {
+          console.log(num)
+          $.post("{{url_for('prediction_growth')}}", JSON.stringify({"num": num}), function(data, status){
+            graph(data)
+          })
+        }
       });
     });
   </script>

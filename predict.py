@@ -32,7 +32,7 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
         agg.dropna(inplace=True)
     return agg
 
-def setup():
+def setup_levels():
     data = pd.read_csv(filepath_or_buffer="./static/data2.csv", index_col="date")
     data = data.apply(pd.to_numeric, errors = "coerce")
     data['spindx'].replace(0, np.nan, inplace=True)
@@ -54,10 +54,10 @@ def setup():
     return values, reframed, historic_data
     # return values, historic_data.reshape(1,1,historic_data.shape[0])
 
-def predict(num=1):
+def predict_levels(num=1):
     num = int(num)
     # values, pred_para = setup()
-    values, reframed, historic_data = setup()
+    values, reframed, historic_data = setup_levels()
 
     reframed = reframed.append(dict(zip(reframed.columns, historic_data)), ignore_index=True)
     scaler = MinMaxScaler(feature_range=(0, 1))
@@ -87,6 +87,52 @@ def predict(num=1):
       # pred_para = np.concatenate((pred_para.flatten()[8:], yhat[0][0]))
       # pred_para = pred_para.reshape(1,1, pred_para.shape[0])
 
+      num -= 1
+
+    chartist = [[],[],[],[],[],[],[],[]]
+    for row in graph:
+      chartist[0].append(row[0])
+      chartist[4].append(row[1])
+      chartist[5].append(row[2])
+      chartist[7].append(row[3])
+      chartist[6].append(row[4])
+      chartist[3].append(row[5])
+      chartist[1].append(row[6])
+      chartist[2].append(row[7])
+    return chartist
+
+def setup_growth():
+    data = pd.read_csv(filepath_or_buffer="./static/data.csv", index_col="date")
+    data = data.apply(pd.to_numeric, errors = "coerce")
+    data['spindx'].replace(0, np.nan, inplace=True)
+    data['spindx'].fillna(method='ffill', inplace=True)
+
+    number_of_variables = 8
+    values = data[['spindx'] + ['TCMNOM_Y2'] + ['TCMNOM_Y10'] + ['DCOILBRENTEU'] + ['GOLDPMGBD228NLBM'] + ['exalus'] + ['exjpus'] + ['exukus']].values
+    values = values.astype('float32')
+
+    historic_data = np.array([])
+    for day in values[-3:]:
+        historic_data = np.concatenate((historic_data, day), axis=None)
+
+    return values, historic_data.reshape(1,1,historic_data.shape[0])
+
+def predict_growth(num=1):
+    num = int(num)
+    values, pred_para = setup_growth()
+
+    backend.clear_session()
+    multi_model = load_model("./static/lstm.hdf5")
+
+    graph = []
+    for row in values[-30:]:
+        graph.append(row)
+
+    while num != 0:
+      yhat = multi_model.predict(pred_para)
+      graph.append(yhat[0][0])
+      pred_para = np.concatenate((pred_para.flatten()[8:], yhat[0][0]))
+      pred_para = pred_para.reshape(1,1, pred_para.shape[0])
       num -= 1
 
     chartist = [[],[],[],[],[],[],[],[]]
