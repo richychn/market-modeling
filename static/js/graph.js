@@ -16,7 +16,7 @@ function graph(raw) {
 }
 
 function updateall() {
-  var checkboxes = document.querySelectorAll(".legendCheckbox"); //array of elements which are checkboxes
+  var checkboxes = document.querySelectorAll(".legend-checkbox"); //array of elements which are checkboxes
   for(var i = 0; i < checkboxes.length; i++) {
     var letter = checkboxes[i].value;
     var line = document.querySelector('.ct-series-' + letter); //gets on element called ctseriesa
