@@ -51,48 +51,48 @@
   justify-content: center;
 }
 
-.legendCheckbox {
+.legend-checkbox {
   position:absolute;
   height:0;
   width:0;
   opacity:0;
 }
 
-.legendCheckbox + .legendLabel {
+.legend-checkbox + .legendLabel {
   color:gray;
   text-decoration: line-through;
   cursor: pointer;
 }
 
-#legendCheckboxA:checked + .legendLabel {
+#legend-checkboxA:checked + .legendLabel {
   color: var(--color-SP500);
   text-decoration:none;
 }
-#legendCheckboxB:checked + .legendLabel {
+#legend-checkboxB:checked + .legendLabel {
   color: var(--color-JPY);
   text-decoration:none;
 }
-#legendCheckboxC:checked + .legendLabel {
+#legend-checkboxC:checked + .legendLabel {
   color: var(--color-GBP);
   text-decoration:none;
 }
-#legendCheckboxD:checked + .legendLabel {
+#legend-checkboxD:checked + .legendLabel {
   color: var(--color-AUD);
   text-decoration:none;
 }
-#legendCheckboxE:checked + .legendLabel {
+#legend-checkboxE:checked + .legendLabel {
   color: var(--color-2YR);
   text-decoration:none;
 }
-#legendCheckboxF:checked + .legendLabel {
+#legend-checkboxF:checked + .legendLabel {
   color: var(--color-10YR);
   text-decoration:none;
 }
-#legendCheckboxG:checked + .legendLabel {
+#legend-checkboxG:checked + .legendLabel {
   color: var(--color-GOLD);
   text-decoration:none;
 }
-#legendCheckboxH:checked + .legendLabel {
+#legend-checkboxH:checked + .legendLabel {
   color: var(--color-OIL);
   text-decoration:none;
 }
@@ -102,10 +102,6 @@
   width: 200px;
 }
 
-
-/*.col2{
-  margin-left: 20px;
-}*/
 
 .ct-series-a .ct-line {
   /* Set the colour of this series line */
