@@ -9,6 +9,7 @@ function graph(raw) {
     allArr.push(arr)
   }
   var data = {
+    labels: ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","Predictions Start Here"],
     series: allArr
   }
   new Chartist.Line('.ct-chart', data)
