@@ -13,6 +13,7 @@ h1 {
 
 .mm-container {
   padding-bottom: 50px;
+  min-height: 85vh;
 }
 
 #home-top {
