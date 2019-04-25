@@ -1,0 +1,1 @@
+{"version":1,"ops":[{"author":{"id":"eeaae0fb3b9f386392800218b86fd2e34e7f6a18"},"files":null,"message":"","timestamp":1556235272,"title":"predict.py W:110, 4: Unused variable 'number_of_variables' (unused-variable)","type":1}]}
