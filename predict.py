@@ -1,18 +1,21 @@
-from math import sqrt
-from numpy import concatenate
+"""
+  Takes a model and data, modifies the data for the model, and runs the model
+"""
+
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.preprocessing import LabelEncoder
-from sklearn.metrics import mean_squared_error
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import LSTM
 from keras.models import load_model
 from keras import backend
-import numpy as np
+from numpy import concatenate
+from numpy import append
+from numpy import array
+from numpy import nan
 
 def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
-    n_vars = 1 if type(data) is list else data.shape[1]
+    """
+      Creates batches of data for the model
+    """
+    n_vars = 1 if isinstance(data, list) else data.shape[1]
     df = pd.DataFrame(data)
     cols, names = list(), list()
     # input sequence (t-n, ... t-1)
@@ -33,20 +36,24 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
     return agg
 
 def setup_levels():
+    """
+      Modifies data for levels data
+      Output: Historical values, batched data, and unbatched data
+    """
     data = pd.read_csv(filepath_or_buffer="./static/data2.csv", index_col="date")
-    data = data.apply(pd.to_numeric, errors = "coerce")
-    data['spindx'].replace(0, np.nan, inplace=True)
+    data = data.apply(pd.to_numeric, errors="coerce")
+    data['spindx'].replace(0, nan, inplace=True)
     data['spindx'].fillna(method='ffill', inplace=True)
 
-    number_of_variables = 8
-    values = data[['spindx'] + ['TCMNOM_Y2'] + ['TCMNOM_Y10'] + ['DCOILBRENTEU'] + ['GOLDPMGBD228NLBM'] + ['exalus'] + ['exjpus'] + ['exukus']].values
+    values = data[['spindx'] + ['TCMNOM_Y2'] + ['TCMNOM_Y10'] + ['DCOILBRENTEU']
+                  + ['GOLDPMGBD228NLBM'] + ['exalus'] + ['exjpus'] + ['exukus']].values
     values = values.astype('float32')
 
-    historic_data = np.array([])
+    historic_data = array([])
     for day in values[-10:]:
-        historic_data = np.concatenate((historic_data, day), axis=None)
+        historic_data = concatenate((historic_data, day), axis=None)
 
-    historic_data = np.append (historic_data, historic_data[:8])
+    historic_data = append (historic_data, historic_data[:8])
     look_back = 10
     time_steps = 1
     reframed = series_to_supervised(values, look_back, time_steps)
@@ -55,6 +62,11 @@ def setup_levels():
     # return values, historic_data.reshape(1,1,historic_data.shape[0])
 
 def predict_levels(num=1):
+    """
+      Scales levels data, runs the model, and returns predictions
+      Input: num represents the number of days to predict
+      Output: An array of last 30 days of historical data plus predictions
+    """
     num = int(num)
     # values, pred_para = setup()
     values, reframed, historic_data = setup_levels()
@@ -74,50 +86,59 @@ def predict_levels(num=1):
         graph.append(row)
 
     while num != 0:
-      yhat = multi_model.predict(pred_para)
+        yhat = multi_model.predict(pred_para)
 
-      pred_para = pred_para.reshape((1,80))
-      pred = concatenate((pred_para[:, :], yhat), axis=1)
-      inv_pred = scaler.inverse_transform(pred)
-      graph.append(inv_pred[:,-8:].flatten())
-      pred_para = np.concatenate((pred_para.flatten()[8:], yhat[0]))
-      pred_para = pred_para.reshape(1,10,8)
+        pred_para = pred_para.reshape((1,80))
+        pred = concatenate((pred_para[:, :], yhat), axis=1)
+        inv_pred = scaler.inverse_transform(pred)
+        graph.append(inv_pred[:,-8:].flatten())
+        pred_para = concatenate((pred_para.flatten()[8:], yhat[0]))
+        pred_para = pred_para.reshape(1,10,8)
 
-      # graph.append(yhat[0][0])
-      # pred_para = np.concatenate((pred_para.flatten()[8:], yhat[0][0]))
-      # pred_para = pred_para.reshape(1,1, pred_para.shape[0])
+        # graph.append(yhat[0][0])
+        # pred_para = concatenate((pred_para.flatten()[8:], yhat[0][0]))
+        # pred_para = pred_para.reshape(1,1, pred_para.shape[0])
 
-      num -= 1
+        num -= 1
 
     chartist = [[],[],[],[],[],[],[],[]]
     for row in graph:
-      chartist[0].append(row[0])
-      chartist[4].append(row[1])
-      chartist[5].append(row[2])
-      chartist[7].append(row[3])
-      chartist[6].append(row[4])
-      chartist[3].append(row[5])
-      chartist[1].append(row[6])
-      chartist[2].append(row[7])
+        chartist[0].append(row[0])
+        chartist[4].append(row[1])
+        chartist[5].append(row[2])
+        chartist[7].append(row[3])
+        chartist[6].append(row[4])
+        chartist[3].append(row[5])
+        chartist[1].append(row[6])
+        chartist[2].append(row[7])
     return chartist
 
 def setup_growth():
+    """
+      Modifies data for growth data
+      Output: Historical values, shaped data for model
+    """
     data = pd.read_csv(filepath_or_buffer="./static/data.csv", index_col="date")
     data = data.apply(pd.to_numeric, errors = "coerce")
-    data['spindx'].replace(0, np.nan, inplace=True)
+    data['spindx'].replace(0, nan, inplace=True)
     data['spindx'].fillna(method='ffill', inplace=True)
 
-    number_of_variables = 8
-    values = data[['spindx'] + ['TCMNOM_Y2'] + ['TCMNOM_Y10'] + ['DCOILBRENTEU'] + ['GOLDPMGBD228NLBM'] + ['exalus'] + ['exjpus'] + ['exukus']].values
+    values = data[['spindx'] + ['TCMNOM_Y2'] + ['TCMNOM_Y10'] + ['DCOILBRENTEU']
+                  + ['GOLDPMGBD228NLBM'] + ['exalus'] + ['exjpus'] + ['exukus']].values
     values = values.astype('float32')
 
-    historic_data = np.array([])
+    historic_data = array([])
     for day in values[-3:]:
-        historic_data = np.concatenate((historic_data, day), axis=None)
+        historic_data = concatenate((historic_data, day), axis=None)
 
     return values, historic_data.reshape(1,1,historic_data.shape[0])
 
 def predict_growth(num=1):
+    """
+      Runs the model, and returns predictions
+      Input: num represents the number of days to predict
+      Output: An array of last 30 days of historical data plus predictions
+    """
     num = int(num)
     values, pred_para = setup_growth()
 
@@ -129,20 +150,20 @@ def predict_growth(num=1):
         graph.append(row)
 
     while num != 0:
-      yhat = multi_model.predict(pred_para)
-      graph.append(yhat[0][0])
-      pred_para = np.concatenate((pred_para.flatten()[8:], yhat[0][0]))
-      pred_para = pred_para.reshape(1,1, pred_para.shape[0])
-      num -= 1
+        yhat = multi_model.predict(pred_para)
+        graph.append(yhat[0][0])
+        pred_para = concatenate((pred_para.flatten()[8:], yhat[0][0]))
+        pred_para = pred_para.reshape(1,1, pred_para.shape[0])
+        num -= 1
 
     chartist = [[],[],[],[],[],[],[],[]]
     for row in graph:
-      chartist[0].append(row[0])
-      chartist[4].append(row[1])
-      chartist[5].append(row[2])
-      chartist[7].append(row[3])
-      chartist[6].append(row[4])
-      chartist[3].append(row[5])
-      chartist[1].append(row[6])
-      chartist[2].append(row[7])
+        chartist[0].append(row[0])
+        chartist[4].append(row[1])
+        chartist[5].append(row[2])
+        chartist[7].append(row[3])
+        chartist[6].append(row[4])
+        chartist[3].append(row[5])
+        chartist[1].append(row[6])
+        chartist[2].append(row[7])
     return chartist
