@@ -10,6 +10,113 @@
 </head>
 <body>
   {% include "navbar.html" %}
+  <div class="page_title">
+      <p> Instructions </p>
+  </div>
+  <div class="how_to_list">
+      <li>
+        <a href=#get_started> Get Started </a>
+      </li>
+      <li>
+          <a href=#param> Parameters </a>
+      </li>
+      <li>
+          <a href=#graph> Graph Type </a>
+      </li>
+      <li>
+          <a href=#input> Input </a>
+      </li>
+  </div>
+  <div class= "big_container">
+    <div class="container mm-container">
+      <hr/>
+      <p id="get_started"> Get Started</p>
+
+      <div class="steps">
+          <div id="first">
+            <p><b>Step 1:</b>  Input the number of days you would like to predict.</p>
+            <img src="./static/images/step_1.gif" alt="">
+          </div>
+          <div id="second">
+            <p><b>Step 2:</b>  Click on the parameters you would like to predict.</p>
+            <img src="./static/images/step_2.gif" alt="">
+          </div>
+          <div id="third">
+            <p><b>Step 3:</b> Switch between the two types of graphs.</p>
+            <img src="./static/images/step_3.gif" alt="">
+          </div>
+      </div>
+      <hr/>
+      <p id="param"> Parameters </p>
+
+      <div class="parameters">
+        <p>
+          <b>S&P500</b> -> One of the four major US indexes. It is a basket of 500 of the largest US stocks, weighted by market capitalization. Moreover, this index is widely considered to be the best indicator of how large US stocks perform on a daily basis. This index is maintained by S&P Dow Jones Indices, whcih is a join venture majority owned by S&P Global.
+        </p>
+        <p>
+          <b>USDJPY</b>  -> Dollar Yen exchange rate.
+        </p>
+        <p>
+            <b>GBPUSD</b>  -> Pound Dollar exchange rate.
+        </p>
+        <p>
+            <b>AUDUSD</b>  -> Australian Dollar exchange rate.
+        </p>
+        <p>
+            <b>2 Year Treasury Yield</b>  -> This refers to the return on an investment in a 2 year US government debt obligation such as a bill, note, or bond. It is essentially the interest rate the government pays in order to borrow money for different periods of time.
+        </p>
+        <p>
+            <b>10 Year Treasury Yield</b>  -> This refers to the return on an investment in a 10 year US government debt obligation such as a bill, note, or bond. It is essentially the interest rate the government pays in order to borrow money for different periods of time.
+        </p>
+        <p>
+            <b>Gold</b>  -> Price of gold.
+        </p>
+        <p>
+            <b>Oil</b>  -> Price of oil.
+        </p>
+      </div>
+      <hr/>
+      <p id="graph"> Graph Types </p>
+
+      <div class="graphs_contents">
+        <p>
+            <b>Growth Rate</b>  -> The relative growth increase, expressed in units of time. Percentage change of a specific variable within a specific time period.
+        </p>
+        <p>
+            <b>Levels</b>  -> The actual values over a certain period of time.
+        </p>
+      </div>
+      <hr/>
+      <p id="input"> Input </p>
+
+      <div class="input">
+        <p>
+            <b>Input</b>  -> The amount of days the user wishes to predict the parameter into the future.
+        </p>
+      </div>
+
+    </div>
+</div>
+
+
+  {% include 'footer.html' %}
+</body>
+</html>
+
+
+<!--
+ <!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800|Mukta" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <title>Market Modeling | A Deep Learning Experiment</title>
+</head>
+<body>
+  {% include "navbar.html" %}
   <div class="container mm-container">
     <div class="page_title">
       <p> How To </p>
@@ -22,7 +129,7 @@
         </li>
         <li id="param">
             <a href="#"> Parameters </a>
-        </li> 
+        </li>
         <li id="graphs">
             <a href="#"> Graphs </a>
         </li>
@@ -48,7 +155,8 @@
       </div>
 
     </div>
-  </div>  
+  </div>
   {% include 'footer.html' %}
 </body>
 </html>
+ -->

@@ -96,9 +96,8 @@
               </p>
 
           </div>
-          <div class="ct-chart ct-golden-section graph">
-            <img src="./static/images/blue_loading_bouncing.gif" id="loading">
-          </div>
+           <div class="ct-chart ct-golden-section graph"></div>
+        <img src="./static/images/blue_loading_bouncing.gif" id="loading">
         </div>
       </div>
     </div>
@@ -114,14 +113,17 @@
       $(".steps")[0].style.display = "none"
       $(".prediction")[0].style.display = "inherit"
       $("#loading")[0].style.display = "flex"
+      $(".graph")[0].style.display = "none"
       var num = $(this).serialize().split("=")[1]
       if ($(".selected")[0].id == "levels") {
         $.post("{{url_for('prediction_levels')}}", JSON.stringify({"num": num}), function(data, status){
           graph(data)
+          setTimeout(updateall, 0);
         })
       } else {
         $.post("{{url_for('prediction_growth')}}", JSON.stringify({"num": num}), function(data, status){
           graph(data)
+          setTimeout(updateall, 0);
         })
       }
     })
@@ -131,15 +133,18 @@
         $("li").removeClass("selected");
         $(this).addClass("selected");
         $("#loading")[0].style.display = "flex"
+        $(".graph")[0].style.display = "none"
         num = $("#search").serialize().split("=")[1]
         if ($(this)[0].id == "levels") {
           $.post("{{url_for('prediction_levels')}}", JSON.stringify({"num": num}), function(data, status){
             graph(data)
+            setTimeout(updateall, 0);
           })
         } else {
           console.log(num)
           $.post("{{url_for('prediction_growth')}}", JSON.stringify({"num": num}), function(data, status){
             graph(data)
+            setTimeout(updateall, 0);
           })
         }
       });
