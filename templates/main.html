@@ -118,10 +118,12 @@
       if ($(".selected")[0].id == "levels") {
         $.post("{{url_for('prediction_levels')}}", JSON.stringify({"num": num}), function(data, status){
           graph(data)
+          setTimeout(updateall, 0);
         })
       } else {
         $.post("{{url_for('prediction_growth')}}", JSON.stringify({"num": num}), function(data, status){
           graph(data)
+          setTimeout(updateall, 0);
         })
       }
     })
