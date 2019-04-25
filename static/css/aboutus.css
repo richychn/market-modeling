@@ -2,3 +2,53 @@ body {
   background-color: var(--light-aqua);
   font-family: 'Montserrat', sans-serif;
 }
+#title  {
+  color: var(--orange);
+  font-family: 'Mukta', sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+}
+#names {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 500;
+}
+#schools {
+  font-size: 16px;
+}
+.team{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+}
+.individuals{
+  display: flex;
+  flex-direction: row;
+}
+.member_info{
+  margin: 0px 18px;
+}
+.team > p{
+  color: var(--orange);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+}
+.member_info > img{
+  width: 12vw;
+  height: 12vw;
+  border-radius: 50%;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+}
+.member_info > p{
+  font-size: 16px;
+  text-align: center;
+}
+
+
+/*body {
+  background-color: var(--light-aqua);
+  font-family: 'Montserrat', sans-serif;
+}
+*/

@@ -13,6 +13,7 @@ function graph(raw) {
   }
   new Chartist.Line('.ct-chart', data)
   $("#loading")[0].style.display = "none"
+  $(".graph")[0].style.display = "inherit"
 }
 
 function updateall() {
