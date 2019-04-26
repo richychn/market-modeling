@@ -1,0 +1,1 @@
+{"version":1,"ops":[{"author":{"id":"eeaae0fb3b9f386392800218b86fd2e34e7f6a18"},"files":null,"message":"","timestamp":1556237279,"title":"app.py C:  4, 0: Constant name \"app\" doesn't conform to UPPER_CASE naming style (invalid-name)","type":1}]}
