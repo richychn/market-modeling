@@ -69,7 +69,7 @@ def setup_levels():
       Modifies data for levels data
       Output: Historical values, batched data, and unbatched data
     """
-    data = pd.read_csv(filepath_or_buffer="./static/data2.csv", index_col="date")
+    data = pd.read_csv(filepath_or_buffer="./static/data/levels.csv", index_col="date")
     data = data.apply(pd.to_numeric, errors = "coerce")
     data['spindx'].replace(0, nan, inplace=True)
     data['spindx'].fillna(method='ffill', inplace=True)
@@ -97,7 +97,7 @@ def predict_levels(num=1):
     pred_para = pred_para.reshape(1,10,8)
 
     K.clear_session()
-    multi_model = load_model("./static/8-8-ESN-L.hdf5", custom_objects={'linex_loss_ret': linex_loss_ret})
+    multi_model = load_model("./static/models/8-8-ESN-L.hdf5", custom_objects={'linex_loss_ret': linex_loss_ret})
     yhat = multi_model.predict(pred_para)
     pred_para = pred_para.reshape((1,80))
     yhat = yhat.reshape((1,80))
@@ -130,7 +130,7 @@ def setup_growth():
       Modifies data for growth data
       Output: Historical values, shaped data for model
     """
-    data = pd.read_csv(filepath_or_buffer="./static/data.csv", index_col="date")
+    data = pd.read_csv(filepath_or_buffer="./static/data/growth_rate.csv", index_col="date")
     data = data.apply(pd.to_numeric, errors = "coerce")
     data['spindx'].replace(0, nan, inplace=True)
     data['spindx'].fillna(method='ffill', inplace=True)
@@ -156,7 +156,7 @@ def predict_growth(num=1):
     values, pred_para = setup_growth()
 
     K.clear_session()
-    multi_model = load_model("./static/ESN_growth.hdf5", custom_objects={'linex_loss_val': linex_loss_val})
+    multi_model = load_model("./static/models/8-8-ESN-G.hdf5", custom_objects={'linex_loss_val': linex_loss_val})
 
     graph = []
     for row in values[-30:]:
