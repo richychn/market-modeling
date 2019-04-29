@@ -9,8 +9,16 @@ To see our Model performance testing results, please see the jupyter-nootbooks i
 # 2. Dynamic Testing: webapp usability test 
 User input: 10 days 
 ![Screenshot](10_growth.png)
+![Screenshot](10_level.png)
+
 User input: 0 days
+![Screenshot](0_growth.png)
+![Screenshot](0_level.png)
 
 User input: -10 days
+![Screenshot](-10_growth.png)
+![Screenshot](-10_level.png)
 
 User input: missing days 
+![Screenshot](missing_growth.png)
+![Screenshot](missing_level.png)
