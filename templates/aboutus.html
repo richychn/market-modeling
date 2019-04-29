@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800|Mukta" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
   <title>Market Modeling | A Deep Learning Experiment</title>
 </head>
 <body>
@@ -59,8 +60,12 @@
       </div>
     </div>
 
-
-
+    <div>
+      <p id="title">Github</p>
+      <p>See the project's documentation and source code at our
+        <a href="https://github.com/richychn/market-modeling">Github</a>.
+        All our testing, final models, and web application code is stored there.</p>
+    </div>
   </div>
   {% include 'footer.html' %}
 </body>
