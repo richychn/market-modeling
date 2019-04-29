@@ -8,7 +8,7 @@ To see our Model performance testing results, please see the jupyter-nootbooks i
 
 # 2. Dynamic Testing: webapp usability test 
 User input: 10 days 
-
+![Screenshot](10_growth.png)
 User input: 0 days
 
 User input: -10 days
