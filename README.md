@@ -13,4 +13,4 @@ We have written a short research report on our results here.
 Our coding style documents can be found [here](./style/)
 
 ## 4. Testing
-Our dynamic testing results could be found [here](./testing/TESTING.md)
+Our dynamic testing results could be found [here](./test/TESTING.md)
