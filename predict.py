@@ -12,6 +12,9 @@ from numpy import array
 from numpy import nan
 
 def sign_ae(x, y):
+    """
+    Checks the sign of x and y and returns a function of the difference
+    """
     sign_x = K.sign(x)
     sign_y = K.sign(y)
     delta = x - y
@@ -19,6 +22,9 @@ def sign_ae(x, y):
 
 
 def linex_loss(delta, a=-1, b=1):
+    """
+    Calculates Linex loss, a financial return loss function
+    """
     if a!= 0 and b > 0:
         loss = b * (K.exp(a * delta) - a * delta - 1)
         return loss
@@ -27,12 +33,19 @@ def linex_loss(delta, a=-1, b=1):
 
 
 def linex_loss_val(y_true, y_pred):
+    """
+    Returns linex loss function without transforming data
+    """
     delta = sign_ae(y_true, y_pred)
     res = linex_loss(delta)
     return K.mean(res)
 
 
 def linex_loss_ret(y_true, y_pred):
+    """
+    Returns linex loss function calculating the change for the data,
+    since linex only considers change
+    """
     diff_true = y_true[1:] - y_true[:-1]
     diff_pred = y_pred[1:] - y_pred[:-1]
 
@@ -73,7 +86,8 @@ def setup_levels():
     data = data.apply(pd.to_numeric, errors = "coerce")
     data['spindx'].replace(0, nan, inplace=True)
     data['spindx'].fillna(method='ffill', inplace=True)
-    values = data[['spindx'] + ['TCMNOM_Y2'] + ['TCMNOM_Y10'] + ['DCOILBRENTEU'] + ['GOLDPMGBD228NLBM'] + ['exalus'] + ['exjpus'] + ['exukus']].values
+    values = data[['spindx'] + ['TCMNOM_Y2'] + ['TCMNOM_Y10'] + ['DCOILBRENTEU']
+                  + ['GOLDPMGBD228NLBM'] + ['exalus'] + ['exjpus'] + ['exukus']].values
     values = values.astype('float32')
     historic_data = array([])
     for day in values[-10:]:
@@ -98,31 +112,32 @@ def predict_levels(num=1):
     pred_para = pred_para.reshape(1,10,8)
 
     K.clear_session()
-    multi_model = load_model("./static/models/8-8-ESN-L.hdf5", custom_objects={'linex_loss_ret': linex_loss_ret})
+    multi_model = load_model("./static/models/8-8-ESN-L.hdf5",
+                             custom_objects={'linex_loss_ret': linex_loss_ret})
 
     graph = []
     for row in values[-30:]:
         graph.append(row)
 
     while num > 0:
-      yhat = multi_model.predict(pred_para)
+        yhat = multi_model.predict(pred_para)
 
-      pred_para = pred_para.reshape((1,80))
-      yhat = yhat.reshape((1,80))
+        pred_para = pred_para.reshape((1,80))
+        yhat = yhat.reshape((1,80))
 
-      pred = concatenate((pred_para[:, :], yhat), axis=1)
-      inv_pred = scaler.inverse_transform(pred)
+        pred = concatenate((pred_para[:, :], yhat), axis=1)
+        inv_pred = scaler.inverse_transform(pred)
 
-      inv_pred = inv_pred[:,-8 * time_steps:].flatten()
-      inv_pred = inv_pred.reshape(10,8)
+        inv_pred = inv_pred[:,-8 * time_steps:].flatten()
+        inv_pred = inv_pred.reshape(10,8)
 
-      for row in inv_pred:
-          graph.append(row)
-      num -= 10
-      pred_para = inv_pred.reshape(1,10,8)
+        for row in inv_pred:
+            graph.append(row)
+        num -= 10
+        pred_para = inv_pred.reshape(1,10,8)
 
     if num < 0:
-      graph = graph[:num]
+        graph = graph[:num]
 
     chartist = [[],[],[],[],[],[],[],[]]
     for row in graph:
@@ -167,21 +182,22 @@ def predict_growth(num=1):
     values, pred_para, timestep = setup_growth()
 
     K.clear_session()
-    multi_model = load_model("./static/models/8-8-LSTM-G.hdf5", custom_objects={'linex_loss_val': linex_loss_val})
+    multi_model = load_model("./static/models/8-8-LSTM-G.hdf5",
+                             custom_objects={'linex_loss_val': linex_loss_val})
 
     graph = []
     for row in values[-30:]:
         graph.append(row)
 
     while num > 0:
-      yhat = multi_model.predict(pred_para)
-      yhat_pred = yhat.reshape(timestep,8)
+        yhat = multi_model.predict(pred_para)
+        yhat_pred = yhat.reshape(timestep,8)
 
-      for row in yhat_pred:
-        graph.append(row)
+        for row in yhat_pred:
+            graph.append(row)
 
-      pred_para = yhat_pred.reshape(1, timestep, 8)
-      num -= 10
+        pred_para = yhat_pred.reshape(1, timestep, 8)
+        num -= 10
 
     if num < 0:
         graph = graph[:num]
