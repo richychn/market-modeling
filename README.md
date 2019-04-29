@@ -11,3 +11,6 @@ We have written a short research report on our results here.
 
 ## 3. Coding Style Guide
 Our coding style documents can be found [here](./style/)
+
+## 4. Testing
+Our dynamic testing results could be found [here](./testing/TESTING.md)
