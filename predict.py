@@ -76,12 +76,13 @@ def setup_levels():
     values = data[['spindx'] + ['TCMNOM_Y2'] + ['TCMNOM_Y10'] + ['DCOILBRENTEU'] + ['GOLDPMGBD228NLBM'] + ['exalus'] + ['exjpus'] + ['exukus']].values
     values = values.astype('float32')
     historic_data = array([])
-    for day in values[-20:]:
+    for day in values[-10:]:
         historic_data = concatenate((historic_data, day), axis=None)
     historic_data = append (historic_data, historic_data)
     look_back = 10
     time_steps = 10
     reframed = series_to_supervised(values, look_back, time_steps)
+    reframed = reframed.append(dict(zip(reframed.columns, historic_data)), ignore_index=True)
     return reframed, values, time_steps
 
 def predict_levels(num=1):
