@@ -166,7 +166,7 @@ def predict_growth(num=1):
     values, pred_para, timestep = setup_growth()
 
     K.clear_session()
-    multi_model = load_model("./static/models/8-8-ESN-G.hdf5", custom_objects={'linex_loss_val': linex_loss_val})
+    multi_model = load_model("./static/models/8-8-LSTM-G.hdf5", custom_objects={'linex_loss_val': linex_loss_val})
 
     graph = []
     for row in values[-30:]:

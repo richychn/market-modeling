@@ -22,6 +22,8 @@ def prediction_levels():
     request = flask.request.get_json(force=True)
     if isinstance(request, dict):
         num = request.get("num", 1)
+        if num == "":
+            num = 0
         data = predict.predict_levels(int(num))
         response = {}
         for i,_ in enumerate(data):
@@ -37,6 +39,8 @@ def prediction_growth():
     request = flask.request.get_json(force=True)
     if isinstance(request, dict):
         num = request.get("num", 1)
+        if num == "":
+            num = 0
         data = predict.predict_growth(int(num))
         response = {}
         for i,_ in enumerate(data):
