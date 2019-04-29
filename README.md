@@ -10,7 +10,7 @@ Our project has multiple deliverables that show our journey and the successes an
 Our web application is at [Market Modeling](https://market-modeling.herokuapp.com). This is the most visual and easiest way of viewing our project. We used Chartist.js to make our graphs. The graphs do not show good results for our neural network, as our model does not do a good job of predicting the actual values of the financial assets.
 
 ### 2.2 Testing
-We tested both our web application and our models. See the results [here](./testing/).
+We tested both our web application and our models. See the results [here](./test/).
 
 ### 2.3 Research Report
 We have written a short research report on our results here. This summarizes our methodology and results in a research-style report.
