@@ -47,54 +47,14 @@
       <div class="graphs">
         <div class="roundbox">
           <div class="legend">
-            <p>
+            {%set id = ["legend-checkboxA", "legend-checkboxB", "legend-checkboxC", "legend-checkboxD", "legend-checkboxE", "legend-checkboxF", "legend-checkboxG", "legend-checkboxH"]%}
+            {%set values = ["a", "b", "c", "d", "e", "f", "g", "h"]%}
+            {% for i in ["SP500", "USDJPY", "GBPUSD", "AUDUSD", "2YTreasury", "10YTreasury", "Gold", "Oil"] %}
               <label>
-                <input type="checkbox" class="legend-checkbox" id="legend-checkboxA" value="a" onchange="updateall();" checked>
-                <span class="legendLabel">SP500</span>
+                <input type="checkbox" class="legend-checkbox" id={{id[loop.index-1]}} value={{values[loop.index-1]}} onchange="updateall();" checked>
+                <span class="legendLabel">{{i}}</span>
               </label>
-              </p>
-              <p>
-                <label>
-                  <input type="checkbox" class="legend-checkbox" id="legend-checkboxB" value="b" onchange="updateall();" checked>
-                  <span class="legendLabel">USDJPY</span>
-                </label>
-              </p>
-              <p>
-                <label>
-                  <input type="checkbox" class="legend-checkbox" id="legend-checkboxC" value="c" onchange="updateall();" checked>
-                  <span class="legendLabel">GBPUSD</span>
-                </label>
-              </p>
-              <p>
-                <label>
-                  <input type="checkbox" class="legend-checkbox" id="legend-checkboxD" value="d" onchange="updateall();" checked>
-                  <span class="legendLabel">AUDUSD</span>
-                </label>
-              </p>
-               <p>
-              <label>
-                <input type="checkbox" class="legend-checkbox" id="legend-checkboxE" value="e" onchange="updateall();" checked>
-                <span class="legendLabel">2YTreasury</span>
-              </label>
-              </p>
-              <p>
-                <label>
-                  <input type="checkbox" class="legend-checkbox" id="legend-checkboxF" value="f" onchange="updateall();" checked>
-                  <span class="legendLabel">10YTreasury</span>
-                </label>
-              </p>
-              <p>
-                <label>
-                  <input type="checkbox" class="legend-checkbox" id="legend-checkboxG" value="g" onchange="updateall();" checked>
-                  <span class="legendLabel">Gold</span>
-                </label>
-              </p>
-              <p>
-                <label>
-                  <input type="checkbox" class="legend-checkbox" id="legend-checkboxH" value="h" onchange="updateall();" checked>
-                  <span class="legendLabel">Oil</span>
-                </label>
-              </p>
+            {% endfor %}
 
           </div>
            <div class="ct-chart ct-golden-section graph"></div>
