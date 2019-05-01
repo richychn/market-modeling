@@ -10,6 +10,7 @@ from numpy import concatenate
 from numpy import append
 from numpy import array
 from numpy import nan
+from numpy import multiply
 
 def sign_ae(x, y):
     """
@@ -79,8 +80,7 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
 
 def setup_levels():
     """
-      Modifies data for levels data
-      Output: Historical values, batched data, and unbatched data
+      Gets and cleans the data for levels
     """
     data = pd.read_csv(filepath_or_buffer="./static/data/levels.csv", index_col="date")
     data = data.apply(pd.to_numeric, errors = "coerce")
@@ -89,55 +89,25 @@ def setup_levels():
     values = data[['spindx'] + ['TCMNOM_Y2'] + ['TCMNOM_Y10'] + ['DCOILBRENTEU']
                   + ['GOLDPMGBD228NLBM'] + ['exalus'] + ['exjpus'] + ['exukus']].values
     values = values.astype('float32')
-    historic_data = array([])
-    for day in values[-10:]:
-        historic_data = concatenate((historic_data, day), axis=None)
-    historic_data = append (historic_data, historic_data)
-    look_back = 10
-    time_steps = 10
-    reframed = series_to_supervised(values, look_back, time_steps)
-    reframed = reframed.append(dict(zip(reframed.columns, historic_data)), ignore_index=True)
-    return reframed, values, time_steps
+    return values
 
 def predict_levels(num=1):
     """
-      Scales levels data, runs the model, and returns predictions
-      Input: num represents the number of days to predict
-      Output: An array of last 30 days of historical data plus predictions
+      Uses predict growth to create the equivalent levels
     """
-    reframed, values, time_steps = setup_levels()
-    scaler = MinMaxScaler(feature_range=(0, 1))
-    scaled = scaler.fit_transform(reframed)
-    pred_para = scaled[-1][:-8 * time_steps]
-    pred_para = pred_para.reshape(1,10,8)
-
-    K.clear_session()
-    multi_model = load_model("./static/models/8-8-ESN-L.hdf5",
-                             custom_objects={'linex_loss_ret': linex_loss_ret})
+    values = setup_levels()
+    growth_predictions = predict_growth(num)
 
     graph = []
     for row in values[-30:]:
         graph.append(row)
 
-    while num > 0:
-        yhat = multi_model.predict(pred_para)
-
-        pred_para = pred_para.reshape((1,80))
-        yhat = yhat.reshape((1,80))
-
-        pred = concatenate((pred_para[:, :], yhat), axis=1)
-        inv_pred = scaler.inverse_transform(pred)
-
-        inv_pred = inv_pred[:,-8 * time_steps:].flatten()
-        inv_pred = inv_pred.reshape(10,8)
-
-        for row in inv_pred:
-            graph.append(row)
-        num -= 10
-        pred_para = inv_pred.reshape(1,10,8)
-
-    if num < 0:
-        graph = graph[:num]
+    for i, _ in enumerate(growth_predictions[0][30:]):
+        last_level = graph[-1]
+        growth = []
+        for asset in range(8):
+            growth.append(1 + growth_predictions[asset][i])
+        graph.append(multiply(last_level, growth))
 
     chartist = [[],[],[],[],[],[],[],[]]
     for row in graph:
