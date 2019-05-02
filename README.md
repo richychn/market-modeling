@@ -13,7 +13,7 @@ Our web application is at [Market Modeling](https://market-modeling.herokuapp.co
 We tested both our web application and our models. See the results [here](./test/).
 
 ### 2.3 Research Report
-We have written a short research report on our results here. This summarizes our methodology and results in a research-style report.
+We have written a short research report on our results [here](https://www.cs.hmc.edu/~rchen/Markets_NN_Final_Report.pdf). This summarizes our methodology and results in a research-style report.
 
 ## 3. Structure of Repository
 
