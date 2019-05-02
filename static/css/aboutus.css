@@ -46,9 +46,6 @@ body {
   text-align: center;
 }
 
-
-/*body {
-  background-color: var(--light-aqua);
-  font-family: 'Montserrat', sans-serif;
+.final_report{
+  height: 500px;;
 }
-*/
